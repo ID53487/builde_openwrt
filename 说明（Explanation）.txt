@@ -4,6 +4,6 @@
 mtk7628nn_openWrt.config
 diy-part3.sh
 diy-part3-2.txt
-其中mtk7628nn_openWrt.config内容来自GitHub用户 xinlingduyu的仓库，应该是lede大佬的代码
+其中mtk7628nn_openWrt.config内容应该是lede大佬的代码
 
 给diy-part2.sh添加了部分注释说明
