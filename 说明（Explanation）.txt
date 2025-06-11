@@ -19,3 +19,5 @@ diy-part3-2.txt
 diy-part2.sh执行之后
 软件包下载和编译之前
 确保网络配置在编译前生效
+
+实际操作发现diy-part3.sh存在文件路径错误，已修改，但未对diy-part3-2.txt做更新
