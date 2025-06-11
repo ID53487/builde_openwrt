@@ -1,1 +1,8 @@
 基于p3terx大佬项目修改
+
+补充了以下文件
+mtk7628nn_openWrt.config
+diy-part3.sh
+diy-part3-2.txt
+
+给diy-part2.sh添加了部分注释说明
