@@ -81,7 +81,7 @@ jobs:
 
     - name: Load custom network configuration  # 新增步骤
       run: |
-        chmod +x $DIY_P3_SH  # 添加可执行权限
+        chmod +x $GITHUB_WORKSPACE/$DIY_P3_SH  # 添加可执行权限
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P3_SH  # 执行diy-part3.sh
 
