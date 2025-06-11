@@ -1,16 +1,14 @@
-#用于编译mtk7628nn的openwrt固件，补充添加wifi功能、usb网络共享功能
-#以下脚本默认用于单网口设备
 #!/bin/bash
 #
 # https://github.com/P3TERX/Actions-OpenWrt
 # File name: diy-part3.sh
 # Description: OpenWrt DIY script part 3 (After make menuconfig)
 #
-# Copyright (c) 2019-2024 P3TERX <https://p3terx.com>
-#
-# This is free software, licensed under the MIT License.
-# See /LICENSE for more information.
-#
+
+# 确保在正确的目录中执行
+cd openwrt || { echo "无法进入openwrt目录"; exit 1; }
+#用于编译mtk7628nn的openwrt固件，补充添加wifi功能、usb网络共享功能
+#以下脚本默认用于单网口设备
 
 # 添加WiFi支持包
 echo "添加WiFi支持包..."
@@ -18,11 +16,8 @@ sed -i '/# CONFIG_PACKAGE_kmod-mac80211 is not set/c\CONFIG_PACKAGE_kmod-mac8021
 sed -i '/# CONFIG_PACKAGE_wpad-basic-wolfssl is not set/c\CONFIG_PACKAGE_wpad-basic-wolfssl=y' .config
 
 # 启用WiFi功能并设置默认配置
-#添加必要的 WiFi 驱动和支持包
-# 创建 WiFi 设备配置，默认使用 2.4GHz 频段 (11 信道)
-# 设置默认 WiFi 名称 (SSID) 为 "OpenWrt"，密码为 "password123"
-# 将 WiFi 接口连接到 LAN 网络
 echo "配置WiFi功能..."
+mkdir -p package/base-files/files/etc/config
 cat >> package/base-files/files/etc/config/wireless << EOF
 
 config wifi-device 'radio0'
@@ -37,15 +32,12 @@ config wifi-iface 'default_radio0'
         option device 'radio0'
         option network 'lan'
         option mode 'ap'
-        option ssid 'github_ID53487'
+        option ssid 'OpenWrt'
         option encryption 'psk2'
-        option key '0123456789'
+        option key 'password123'
 EOF
 
 # 添加USB网络共享支持
-# 添加多种 USB 网络适配器驱动支持
-# 配置 USB 接口为 WAN 网络连接
-# 设置自动获取 IP 地址 (DHCP 客户端)
 echo "添加USB网络共享支持..."
 sed -i '/# CONFIG_PACKAGE_kmod-usb-net is not set/c\CONFIG_PACKAGE_kmod-usb-net=y' .config
 sed -i '/# CONFIG_PACKAGE_kmod-usb-net-asix is not set/c\CONFIG_PACKAGE_kmod-usb-net-asix=y' .config
@@ -55,11 +47,9 @@ sed -i '/# CONFIG_PACKAGE_kmod-usb-net-rtl8152 is not set/c\CONFIG_PACKAGE_kmod-
 sed -i '/# CONFIG_PACKAGE_kmod-usb2 is not set/c\CONFIG_PACKAGE_kmod-usb2=y' .config
 sed -i '/# CONFIG_PACKAGE_kmod-usb3 is not set/c\CONFIG_PACKAGE_kmod-usb3=y' .config
 
-# 配置单网口路由器功能（桥接模式）
-# 配置单网口为桥接模式，同时支持 LAN 和 WAN 功能
-# 设置默认 IP 地址为 192.168.1.1
-# 启用 NAT 和防火墙功能，实现网络地址转换
+# 配置单网口路由器功能
 echo "配置单网口路由器功能..."
+mkdir -p package/base-files/files/etc/config
 cat > package/base-files/files/etc/config/network << EOF
 config interface 'loopback'
         option device 'lo'
@@ -93,6 +83,7 @@ EOF
 
 # 配置防火墙规则以支持NAT和转发
 echo "配置防火墙规则..."
+mkdir -p package/base-files/files/etc/config
 cat > package/base-files/files/etc/config/firewall << EOF
 config defaults
         option syn_flood '1'
@@ -202,7 +193,8 @@ EOF
 
 # 启用USB网络支持的服务
 echo "启用USB网络支持服务..."
-cat >> package/base-files/files/etc/uci-defaults/99-usb-network << EOF
+mkdir -p package/base-files/files/etc/uci-defaults
+cat > package/base-files/files/etc/uci-defaults/99-usb-network << EOF
 #!/bin/sh
 # 启用USB网络接口
 uci set network.wan.device='usb0'
@@ -218,4 +210,5 @@ chmod +x package/base-files/files/etc/uci-defaults/99-usb-network
 
 echo "DIY脚本执行完成！"
 EOF
+
 
