@@ -1,4 +1,5 @@
 基于p3terx大佬项目修改
+越后面的内容越重要
 
 补充了以下文件
 mtk7628nn_openWrt.config
