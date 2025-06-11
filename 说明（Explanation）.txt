@@ -8,3 +8,14 @@ diy-part3-2.txt
 
 本项目将mtk7628nn_openWrt.config代码复制到了.config中
 给diy-part2.sh添加了部分注释说明
+
+对.github/workflows/openwrt-builder.yml进行了如下修改，使得diy-part3.sh能在diy-part2.sh之后自动执行
+新增环境变量：在env部分添加了DIY_P3_SH: diy-part3.sh，便于统一管理脚本名称
+新增执行步骤：在Load custom configuration步骤之后添加了Load custom network configuration步骤，用于：
+给 diy-part3.sh 添加可执行权限
+进入 OpenWrt 目录
+执行 diy-part3.sh 脚本
+执行顺序保证：这个新增步骤位于：
+diy-part2.sh执行之后
+软件包下载和编译之前
+确保网络配置在编译前生效
