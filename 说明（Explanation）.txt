@@ -31,3 +31,5 @@ diy-part2.sh执行之后
 6.新token名称填GITHUB_TOKEN并勾选上下方repo的全部内容（因为openwrt-builder.yml里用的这个名称所以这也填这个，用其他名称需要改openwrt-builder.yml文件代码），有效期按需设置，接着复制生成的token密钥
 7.然后在项目所在仓库里点settings，在Actions secrets and variables里选Actions再点添加选项输入名称GH_TOKEN和刚刚复制的密钥并保存
 8.在Actions secrets and variables同级的选项里选Actions，选general，下滑勾选上Read and write permissions并保存，自此设置完成
+
+原计划通过diy-part1/2/3来执行脚本，但总是报错，于是现在将新增diy-part3.sh代码放入diy-part2.sh并备份原diy-part3.sh为old_diy-part2.sh，同时将此前修改过的openwrt-builder.yml做更名备份bad_openwrt-builder.yml，并且新建openwrt-builder.yml使用大佬原版代码
