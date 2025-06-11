@@ -22,3 +22,10 @@ diy-part2.sh执行之后
 
 实际操作发现diy-part3.sh存在文件路径错误，已修改，但未对diy-part3-2.txt做更新
 针对diy-part3.sh的修改更新了openwrt-builder.yml
+在正式编译固件时需要做以下设置：
+1.点击个人头像选择settings
+2.选择Developer Settings
+3.选择personal access tokens下的tokens (classic)
+5.点击generate new token选择generate new token(classic)
+6.新token名称填GITHUB_TOKEN并勾选上下方repo的全部内容（因为openwrt-builder.yml里用的这个名称所以这也填这个，用其他名称需要改openwrt-builder.yml文件代码），有效期按需设置
+7.
