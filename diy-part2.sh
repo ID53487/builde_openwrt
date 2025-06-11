@@ -19,7 +19,9 @@
 # Modify hostname/修改 OpenWrt 系统的默认主机名/由OpenWrt改为P3TERX-Router
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
 # 确保在正确的目录中执行
-cd /workdir/openwrt || { echo "无法进入openwrt目录"; exit 1; }
+# 修改此处：从 /openwrt 改为 $GITHUB_WORKSPACE/openwrt
+cd $GITHUB_WORKSPACE/openwrt || { echo "无法进入openwrt目录"; exit 1; }
+
 #用于编译mtk7628nn的openwrt固件，补充添加wifi功能、usb网络共享功能
 #以下脚本默认用于单网口设备
 
@@ -222,4 +224,3 @@ EOF
 chmod +x package/base-files/files/etc/uci-defaults/99-usb-network
 
 echo "DIY脚本执行完成！"
-EOF
