@@ -1,0 +1,1 @@
+#用于编译mtk7628nn的openwrt固件，补充添加wifi功能、usb网络共享功能
