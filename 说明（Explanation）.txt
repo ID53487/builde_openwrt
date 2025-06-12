@@ -46,3 +46,6 @@ opkg install kmod-usb-net-rndis  # RNDIS设备这里面这些驱动程序，现�
 这些需求
 
 修改了openwrt-builder.yml，编译后会把固件发送到一个邮箱（），请改成自己的
+
+彻底乱掉了，懒得搞了，目前能信任的文件只剩diy-part1/2/3.sh
+.config和yml都坏了
