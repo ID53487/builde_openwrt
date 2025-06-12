@@ -33,3 +33,15 @@ diy-part2.sh执行之后
 8.在Actions secrets and variables同级的选项里选Actions，选general，下滑勾选上Read and write permissions并保存，自此设置完成
 
 原计划通过diy-part1/2/3来执行脚本，但总是报错，于是现在将新增diy-part3.sh代码放入diy-part2.sh并备份原diy-part2.sh为old_diy-part2.sh，同时将此前修改过的openwrt-builder.yml做更名备份bad_openwrt-builder.yml，并且新建openwrt-builder.yml使用大佬原版代码
+
+由AI重写了 .config的内容，以满足我的
+编译出的openwrt系统支持mtk7628nn芯片使用，具体我要用于的路由器设备有一个网口，一个usb接口，支持4gwifi，我希望编译出的新固件默认优先使用usb口以网络共享的方式当wan口，网口可以当wan口也可以当lan口将usb口输入的网络转化为网线网络，已知我的设备需要路由器固件具备# 通用USB网络支持
+opkg install kmod-usb-net
+
+# 根据您的网卡芯片组选择安装
+opkg install kmod-usb-net-asix  # ASIX芯片组
+opkg install kmod-usb-net-rtl8152  # Realtek 8152/8153芯片组
+opkg install kmod-usb-net-cdc-ether  # 许多基于CDC的网卡
+opkg install kmod-usb-net-rndis  # RNDIS设备这里面这些驱动程序，现在你开始写代码
+
+这些需求
