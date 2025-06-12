@@ -185,5 +185,5 @@ jobs:
           ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
           
           如果附件下载失败，请使用上面的链接下载。
-        to: null_mail@foxmail.com
+        to: you_mail@qq.com
 
