@@ -6,7 +6,9 @@
 #
 
 # 确保在正确的目录中执行
-cd openwrt || { echo "无法进入openwrt目录"; exit 1; }
+# 修改此处：从 /openwrt 改为 $GITHUB_WORKSPACE/openwrt
+cd $GITHUB_WORKSPACE/openwrt || { echo "无法进入openwrt目录"; exit 1; }
+
 #用于编译mtk7628nn的openwrt固件，补充添加wifi功能、usb网络共享功能
 #以下脚本默认用于单网口设备
 
@@ -209,6 +211,3 @@ EOF
 chmod +x package/base-files/files/etc/uci-defaults/99-usb-network
 
 echo "DIY脚本执行完成！"
-EOF
-
-
