@@ -45,4 +45,4 @@ opkg install kmod-usb-net-cdc-ether  # 许多基于CDC的网卡
 opkg install kmod-usb-net-rndis  # RNDIS设备这里面这些驱动程序，现在你开始写代码
 这些需求
 
-修改了openwrt-builder.yml，编译后会把固件发送到一个邮箱，请改成自己的
+修改了openwrt-builder.yml，编译后会把固件发送到一个邮箱（），请改成自己的
