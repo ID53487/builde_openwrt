@@ -72,6 +72,12 @@ jobs:
         make -j$(nproc) download || make -j1 download V=s
         make -j$(nproc) || make -j1 V=s
 
+    - name: Compress firmware
+      run: |
+        cd openwrt/bin/targets
+        tar -czvf openwrt-firmware.tar.gz *
+        mv openwrt-firmware.tar.gz ../../../
+
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
       with:
@@ -80,6 +86,7 @@ jobs:
 
     - name: Send email with firmware
       uses: dawidd6/action-send-mail@v3
+      continue-on-error: true  # 邮件发送失败不影响整个工作流
       with:
         server_address: smtp.qq.com
         server_port: 465
@@ -90,10 +97,12 @@ jobs:
           您好，OpenWrt固件已编译完成。
           编译时间: ${{ github.run_id }}
           提交哈希: ${{ github.sha }}
+          
           可以从以下链接下载固件:
           ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
-        to: 1879215080@qq.com
+          
+          如果附件下载失败，请使用上面的链接下载。
+        to: null_mail@foxmail.com
         from: GitHub Actions
         secure: true
-        files: |
-          openwrt/bin/targets/**/*.bin
+        files: openwrt-firmware.tar.gz
